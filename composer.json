@@ -1,0 +1,17 @@
+{
+    "name": "ohnotnow/macos_notification_api",
+    "description": "Basic HTTP API to trigger native MacOS notifications",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ohnotnow\\MacosNotificationApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ohffs",
+            "email": "ohffsnotnow@gmail.com"
+        }
+    ],
+    "require": {}
+}
