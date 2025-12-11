@@ -27,10 +27,12 @@ Available options:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `CUSTOM_SOUND_PATH` | _(none)_ | Path to a directory of custom sounds. |
+| `SERVER_HOST` | `127.0.0.1` | Host to bind to (`0.0.0.0` for network access) |
+| `SERVER_PORT` | `8000` | Port to listen on |
 | `DEFAULT_TITLE` | `Notification` | Default notification title |
 | `DEFAULT_MESSAGE` | `Hello!` | Default notification message |
 | `DEFAULT_SOUND` | `Sosumi` | Default sound name (system sound) or filename (if using custom path) |
+| `CUSTOM_SOUND_PATH` | _(none)_ | Path to a directory of custom sounds |
 
 ## Usage
 
@@ -89,6 +91,44 @@ Then from your Pi:
 ```bash
 curl "http://192.168.1.100:8000/notify?title=Pi&message=Task%20complete&sound=Glass"
 ```
+
+## Running as a Background Service
+
+You can run the notification server as a macOS Launch Agent so it starts automatically when you log in.
+
+### Install the service
+
+```bash
+./service.sh install
+```
+
+This will:
+- Create a launchd plist with your current `.env` settings
+- Start the server immediately
+- Configure it to start on login and restart if it crashes
+
+### Service commands
+
+```bash
+./service.sh install    # Install and start the service
+./service.sh uninstall  # Stop and remove the service
+./service.sh status     # Check if service is running
+./service.sh logs       # View recent log output
+./service.sh restart    # Restart (also picks up .env changes)
+```
+
+### Changing configuration
+
+To change the host or port after installation:
+
+1. Edit your `.env` file
+2. Run `./service.sh restart`
+
+### Logs
+
+Logs are stored in `~/Library/Logs/notification-server/`:
+- `stdout.log` - Server output
+- `stderr.log` - Errors
 
 ## Custom Sounds
 

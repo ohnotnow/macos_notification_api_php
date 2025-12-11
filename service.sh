@@ -25,6 +25,9 @@ get_config() {
 SERVER_HOST=$(get_config "SERVER_HOST" "0.0.0.0")
 SERVER_PORT=$(get_config "SERVER_PORT" "8000")
 
+# Find PHP binary - use explicit path for launchd reliability
+PHP_PATH=$(which php)
+
 # Generate plist content
 generate_plist() {
     cat << EOF
@@ -37,8 +40,7 @@ generate_plist() {
 
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/bin/env</string>
-        <string>php</string>
+        <string>${PHP_PATH}</string>
         <string>${SCRIPT_DIR}/server.php</string>
         <string>${SERVER_HOST}</string>
         <string>${SERVER_PORT}</string>
@@ -72,6 +74,7 @@ EOF
 case "$1" in
     install)
         echo "Installing notification server..."
+        echo "  PHP:  $PHP_PATH"
         echo "  Host: $SERVER_HOST"
         echo "  Port: $SERVER_PORT"
         echo ""
@@ -148,6 +151,7 @@ case "$1" in
 
     restart)
         echo "Restarting notification server..."
+        echo "  PHP:  $PHP_PATH"
         echo "  Host: $SERVER_HOST"
         echo "  Port: $SERVER_PORT"
         launchctl unload "$PLIST_DEST" 2>/dev/null
@@ -172,6 +176,8 @@ case "$1" in
         echo "Configuration (via .env file):"
         echo "  SERVER_HOST  Currently: $SERVER_HOST"
         echo "  SERVER_PORT  Currently: $SERVER_PORT"
+        echo ""
+        echo "PHP binary: $PHP_PATH"
         exit 1
         ;;
 esac
