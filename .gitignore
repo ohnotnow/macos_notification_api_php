@@ -1,4 +1,5 @@
 vendor
 ORIGINAL_README.md
 main.py
+.env
 

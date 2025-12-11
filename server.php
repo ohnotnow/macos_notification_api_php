@@ -13,8 +13,8 @@ if (file_exists(__DIR__ . '/.env')) {
     $dotenv->load();
 }
 
-$host = $argv[1] ?? '127.0.0.1';
-$port = $argv[2] ?? '8000';
+$host = $argv[1] ?? $_ENV['SERVER_HOST'] ?? '127.0.0.1';
+$port = $argv[2] ?? $_ENV['SERVER_PORT'] ?? '8000';
 
 $notificationService = new NotificationService(
     defaultTitle: $_ENV['DEFAULT_TITLE'] ?? 'Notification',
