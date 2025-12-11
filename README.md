@@ -130,6 +130,36 @@ Logs are stored in `~/Library/Logs/notification-server/`:
 - `stdout.log` - Server output
 - `stderr.log` - Errors
 
+## Shell Alias
+
+Add this function to your `~/.bashrc` or `~/.zshrc` for quick notifications:
+
+```bash
+notify() {
+  local title="${1:-Notification}"
+  local message="${2:-Hello!}"
+  local sound="$3"
+
+  # Simple URL encoding using sed (covers common characters)
+  urlencode() { printf %s "$1" | sed 's/ /%20/g; s/!/%21/g; s/"/%22/g; s/#/%23/g; s/&/%26/g; s/'\''/%27/g'; }
+
+  # Or if you have jq installed, use this for full URL encoding:
+  # urlencode() { printf %s "$1" | jq -sRr @uri; }
+
+  local url="http://localhost:8000/notify?title=$(urlencode "$title")&message=$(urlencode "$message")"
+  [[ -n "$sound" ]] && url+="&sound=$(urlencode "$sound")"
+  curl -s "$url" > /dev/null
+}
+```
+
+Then use it like:
+
+```bash
+notify "Build complete" "Your project finished compiling" "Glass"
+notify "Quick alert" "Something happened"  # uses default sound
+notify  # uses all defaults
+```
+
 ## Custom Sounds
 
 To use your own sounds instead of system sounds:
