@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32220af4ca7c2d3e730524c7c6eecdaa",
+    "content-hash": "33b005e5697826e3ab1503cc9a3c9a5d",
     "packages": [
         {
             "name": "evenement/evenement",
@@ -170,6 +170,49 @@
                 }
             ],
             "time": "2024-07-20T21:45:45+00:00"
+        },
+        {
+            "name": "ohffs/simple-reactphp-router",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ohnotnow/simple-reactphp-router.git",
+                "reference": "19bc2a4f85adddb488a1ce9e1bbf99103e08815a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ohnotnow/simple-reactphp-router/zipball/19bc2a4f85adddb488a1ce9e1bbf99103e08815a",
+                "reference": "19bc2a4f85adddb488a1ce9e1bbf99103e08815a",
+                "shasum": ""
+            },
+            "require": {
+                "react/http": "^1.11"
+            },
+            "require-dev": {
+                "pestphp/pest": "^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ohffs\\SimpleReactphpRouter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ohffs",
+                    "email": "ohffsnotnow@gmail.com"
+                }
+            ],
+            "description": "Simple attribute-based router wrapper for ReactPHP HTTP server",
+            "support": {
+                "issues": "https://github.com/ohnotnow/simple-reactphp-router/issues",
+                "source": "https://github.com/ohnotnow/simple-reactphp-router/tree/1.0.1"
+            },
+            "time": "2025-12-13T12:26:36+00:00"
         },
         {
             "name": "phpoption/phpoption",
